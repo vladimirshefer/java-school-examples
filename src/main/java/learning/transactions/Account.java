@@ -5,20 +5,30 @@ import java.util.List;
 
 public class Account {
 
-  private double balance;
+  private MoneyAmount balance;
+  private String ownerName;
   private List<Transaction> history = new ArrayList<>();
 
-  public Account(double balance, String ownerName){
+  public Account(MoneyAmount balance, String ownerName){
     this.balance = balance;
+    this.ownerName = ownerName;
   }
 
   public void apply(Transaction transaction) {
-    balance += transaction.diff();
+    MoneyAmount diff = ExchangeService.exchange(
+        transaction.diff(balance),
+        balance.getCurrency()
+    );
+
+    balance = new MoneyAmount(
+        balance.getAmount() + diff.getAmount(),
+        balance.getCurrency()
+    );
     history.add(transaction);
   }
 
   public double balance() {
-    return this.balance;
+    return this.balance.getAmount();
   }
 
   public List<Transaction> history(){

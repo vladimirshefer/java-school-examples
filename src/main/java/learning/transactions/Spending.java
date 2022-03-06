@@ -2,21 +2,21 @@ package learning.transactions;
 
 public class Spending extends Transaction {
 
-  private double amount;
+  private MoneyAmount moneyAmount;
   private String comment;
 
-  public Spending(double amount, String comment) {
-    this.amount = amount;
+  public Spending(MoneyAmount moneyAmount, String comment) {
+    this.moneyAmount = moneyAmount;
     this.comment = comment;
   }
 
   @Override
-  public double diff() {
-    return -amount;
+  public MoneyAmount diff(MoneyAmount accountBalance) {
+    return new MoneyAmount(-moneyAmount.getAmount(), moneyAmount.getCurrency());
   }
 
   public String toString(){
-    return -amount + " " + comment;
+    return -moneyAmount.getAmount() + " " + moneyAmount.getCurrency() + " " + comment;
   }
 
 }
