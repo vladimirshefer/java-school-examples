@@ -1,7 +1,5 @@
 package learning.areas;
 
-import com.sun.istack.internal.Nullable;
-
 public class Triangle extends Figure {
 
   private final double side1;
