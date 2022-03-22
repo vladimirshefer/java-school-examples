@@ -13,8 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main {
+
+  public static final Logger logger = Logger.getLogger("Main");
 
   public static void main(String[] args) throws IOException {
     // дан файл с текстом
@@ -31,6 +35,9 @@ public class Main {
             Main.class.getResourceAsStream("/text.txt")
         )
     );
+
+    logger.log(Level.INFO, "Opened file");
+
     List<String> lines = Main.readAllLines(reader);
 
     List<String> textWords = new ArrayList<>();
